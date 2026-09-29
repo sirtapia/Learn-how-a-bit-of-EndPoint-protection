@@ -101,7 +101,7 @@ ALERTS = [
         "files_modified": [],
         "ioc": "PsExec used for remote execution — common in both admin tasks and ransomware",
         "hint": (
-            "💡 Carbon Black tip: PsExec is a legitimate sysadmin tool — BUT it's also\n"
+            " Carbon Black tip: PsExec is a legitimate sysadmin tool — BUT it's also\n"
             "   heavily used by ransomware gangs to move laterally through a network.\n"
             "   Carbon Black flags it either way (that's the POLICY at work).\n"
             "   Key question: is this IT staff doing their normal job, or an attacker?\n"
@@ -127,7 +127,7 @@ ALERTS = [
         "files_modified": ["C:\\Users\\t.washington\\AppData\\Local\\Temp\\out.txt"],
         "ioc": "Browser spawning cmd.exe running enumeration commands — drive-by download pattern",
         "hint": (
-            "💡 Carbon Black tip: Chrome should NEVER spawn cmd.exe.\n"
+            " Carbon Black tip: Chrome should NEVER spawn cmd.exe.\n"
             "   When a browser launches a command prompt, it usually means a malicious\n"
             "   website triggered a drive-by download exploit.\n"
             "   'whoami', 'net user', 'ipconfig' are RECONNAISSANCE commands —\n"
@@ -153,7 +153,7 @@ ALERTS = [
         "files_modified": [],
         "ioc": "Process binding to all interfaces (0.0.0.0) on non-standard port",
         "hint": (
-            "💡 Carbon Black tip: Binding to 0.0.0.0 means 'listen on ALL network interfaces'.\n"
+            " Carbon Black tip: Binding to 0.0.0.0 means 'listen on ALL network interfaces'.\n"
             "   This CAN be suspicious — malware sometimes does this to open a backdoor.\n"
             "   BUT: this is a developer running a Django web server from VS Code.\n"
             "   Carbon Black's policy for the 'Developer Workstation Policy' is LESS strict\n"
@@ -179,7 +179,7 @@ ALERTS = [
         "files_modified": ["C:\\Windows\\Temp\\~tmp4821.dmp"],
         "ioc": "lsass.exe memory read by unknown process — Mimikatz-style credential theft",
         "hint": (
-            "💡 Carbon Black tip: lsass.exe holds ALL logged-in user credentials in memory.\n"
+            " Carbon Black tip: lsass.exe holds ALL logged-in user credentials in memory.\n"
             "   Attackers use tools like Mimikatz to read lsass memory and steal passwords.\n"
             "   A domain controller (SERVER-DC-001) is the most valuable target in any network —\n"
             "   it controls access to everything.\n"
@@ -231,7 +231,7 @@ ALERTS = [
         "files_modified": ["C:\\Windows\\Temp\\svchost32.exe"],
         "ioc": "certutil abused to download executable from IP address; named to mimic svchost.exe",
         "hint": (
-            "💡 Carbon Black tip: certutil.exe is a legitimate Windows certificate tool.\n"
+            " Carbon Black tip: certutil.exe is a legitimate Windows certificate tool.\n"
             "   Attackers abuse it to download files because it bypasses some security tools\n"
             "   — this is called a 'Living off the Land' (LotL) technique.\n"
             "   Red flags here:\n"
@@ -259,7 +259,7 @@ ALERTS = [
         "files_modified": ["C:\\Users\\d.nguyen\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\updater.vbs"],
         "ioc": "Outlook spawned VBScript; script added itself to Startup folder for persistence",
         "hint": (
-            "💡 Carbon Black tip: Outlook spawning wscript.exe means someone opened a\n"
+            " Carbon Black tip: Outlook spawning wscript.exe means someone opened a\n"
             "   malicious email attachment (.vbs file disguised as an invoice).\n"
             "   The script then wrote itself to the STARTUP folder — that's PERSISTENCE.\n"
             "   Persistence means the malware survives a reboot.\n"
@@ -350,14 +350,14 @@ def show_hint(alert, verdict):
     correct = alert["answer"]
     if verdict == correct:
         print()
-        print(clr(f"  ✅ Correct! This alert is {correct.upper()}.", C.GREEN))
+        print(clr(f"   Correct! This alert is {correct.upper()}.", C.GREEN))
     elif verdict == "suspicious" and correct in ("malicious", "benign"):
         print()
         print(clr(f"  🟡 Partially right — this one is actually {correct.upper()}.", C.YELLOW))
         print(clr("     'Suspicious' is a valid escalation step, but try to commit!", C.DIM))
     else:
         print()
-        print(clr(f"  ❌ Not quite — this alert is {correct.upper()}.", C.RED))
+        print(clr(f"   Not quite — this alert is {correct.upper()}.", C.RED))
     print()
     print(alert["hint"])
     print()
@@ -381,7 +381,7 @@ def print_summary(results):
 
     print(clr("  ── Alert breakdown ───────────────────────────────────────", C.DIM))
     for r in results:
-        icon = "✅" if r["verdict"] == r["correct_answer"] else "❌"
+        icon = "Correct" if r["verdict"] == r["correct_answer"] else "❌"
         verdict_clr = C.GREEN if r["verdict"] == "benign" else (C.RED if r["verdict"] == "malicious" else C.YELLOW)
         print(f"  {icon}  {r['id']}  {r['alert_type']:<35} → {clr(r['verdict'].upper(), verdict_clr)}")
     print()
@@ -412,7 +412,7 @@ def print_summary(results):
     with open("triage_report.json", "w") as f:
         json.dump(report, f, indent=2)
 
-    print(clr("  ✅ Full report saved to triage_report.json", C.GREEN))
+    print(clr("   Full report saved to triage_report.json", C.GREEN))
     print()
 
 
