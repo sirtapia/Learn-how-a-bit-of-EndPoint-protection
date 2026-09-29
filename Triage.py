@@ -75,7 +75,7 @@ ALERTS = [
         "files_modified": [],
         "ioc": "Base64-encoded PowerShell downloading from external URL",
         "hint": (
-            "💡 Carbon Black tip: PowerShell spawned BY Excel is a classic malware trick.\n"
+            " Carbon Black tip: PowerShell spawned BY Excel is a classic malware trick.\n"
             "   Attackers hide code in Excel macros that launch PowerShell to download payloads.\n"
             "   The '-enc' flag means the command is Base64-encoded — often used to hide malicious intent.\n"
             "   Carbon Black's sensor caught this because its POLICY flagged:\n"
@@ -276,7 +276,7 @@ ALERTS = [
 def print_banner():
     os.system("clear" if os.name == "posix" else "cls")
     print(clr("=" * 65, C.BLUE))
-    print(clr(bold("  🛡️  EDR ALERT TRIAGE TOOL"), C.CYAN))
+    print(clr(bold("    EDR ALERT TRIAGE TOOL"), C.CYAN))
     print(clr("  Simulating VMware Carbon Black analyst workflow", C.DIM))
     print(clr("=" * 65, C.BLUE))
     print()
@@ -353,7 +353,7 @@ def show_hint(alert, verdict):
         print(clr(f"   Correct! This alert is {correct.upper()}.", C.GREEN))
     elif verdict == "suspicious" and correct in ("malicious", "benign"):
         print()
-        print(clr(f"  🟡 Partially right — this one is actually {correct.upper()}.", C.YELLOW))
+        print(clr(f"   Partially right — this one is actually {correct.upper()}.", C.YELLOW))
         print(clr("     'Suspicious' is a valid escalation step, but try to commit!", C.DIM))
     else:
         print()
