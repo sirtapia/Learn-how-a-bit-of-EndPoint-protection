@@ -205,7 +205,7 @@ ALERTS = [
         "files_modified": [],
         "ioc": "Application launched from user AppData — not installed system-wide",
         "hint": (
-            "💡 Carbon Black tip: Microsoft Teams installs itself in AppData (per-user install)\n"
+            " Carbon Black tip: Microsoft Teams installs itself in AppData (per-user install)\n"
             "   rather than Program Files. Carbon Black flags this because malware ALSO\n"
             "   likes to hide in AppData to avoid needing admin rights.\n"
             "   But look at the network connection: teams.microsoft.com:443 — that's Microsoft.\n"
